@@ -1,0 +1,59 @@
+[
+  {
+    "name": "OrderCleanupFunction",
+    "scriptFile": "OrderFlow.Functions.dll",
+    "entryPoint": "OrderFlow.Functions.Functions.OrderCleanupFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "timerInfo",
+        "direction": "In",
+        "type": "timerTrigger",
+        "schedule": "0 0 0 * * *",
+        "properties": {}
+      }
+    ]
+  },
+  {
+    "name": "OrderEventFunction",
+    "scriptFile": "OrderFlow.Functions.dll",
+    "entryPoint": "OrderFlow.Functions.Functions.OrderEventFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "eventGridEvent",
+        "direction": "In",
+        "type": "eventGridTrigger",
+        "cardinality": "One",
+        "properties": {}
+      }
+    ]
+  },
+  {
+    "name": "OrderProcessorFunction",
+    "scriptFile": "OrderFlow.Functions.dll",
+    "entryPoint": "OrderFlow.Functions.Functions.OrderProcessorFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "message",
+        "direction": "In",
+        "type": "serviceBusTrigger",
+        "dataType": "String",
+        "queueName": "order-queue",
+        "connection": "ServiceBus:ConnectionString",
+        "cardinality": "One",
+        "properties": {}
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+
+    "CosmosDb__AccountEndpoint": "https://localhost:8081",
+    "CosmosDb__AccountKey": "<your-cosmos-emulator-key>",
+    "CosmosDb__DatabaseName": "OrderFlowDb",
+    "CosmosDb__ContainerName": "Orders",
+
+    "ServiceBus__ConnectionString": "<your-servicebus-connection-string>",
+    "ServiceBus__QueueName": "order-queue",
+    "ServiceBus__TopicName": "order-events",
+
+    "EventGrid__TopicEndpoint": "https://<your-eventgrid-topic>.eastus-1.eventgrid.azure.net/api/events",
+    "EventGrid__TopicKey": "<your-eventgrid-key>",
+
+    "BlobStorage__ConnectionString": "DefaultEndpointsProtocol=https;AccountName=<your-storage-account>;AccountKey=<your-key>;EndpointSuffix=core.windows.net",
+    "BlobStorage__AccountName": "<your-storage-account>",
+
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=<your-key>",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "<your-key>"
+  }
+}
