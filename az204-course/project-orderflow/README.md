@@ -3,7 +3,6 @@
 A full-stack e-commerce order processing system built with .NET 8, demonstrating Azure services covered in the AZ-204 exam.
 
 ---
-
 ## Architecture
 
 ```
