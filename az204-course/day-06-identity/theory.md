@@ -10,7 +10,6 @@
 - Microsoft Graph API basics
 
 ---
-
 ## 1. Microsoft Identity Platform
 
 The Microsoft Identity Platform is the authentication and authorization service for Azure. It implements OAuth 2.0 and OpenID Connect.
