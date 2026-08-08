@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "EventGridTopicEndpoint": "https://order-events-topic.eastus-1.eventgrid.azure.net/api/events",
+    "EventGridTopicKey": "YOUR_EVENT_GRID_TOPIC_KEY",
+    "EventHubConnectionString": "Endpoint=sb://evhns-telemetry-demo.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=YOUR_KEY",
+    "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=steventdemo2026;AccountKey=YOUR_KEY;EndpointSuffix=core.windows.net"
+  }
+}
