@@ -724,6 +724,10 @@ az role assignment create `
 
 #### Step 3: SecretProviderClass Definition
 
+> ⚠️ **အရေးကြီး:** SecretProviderClass နှစ်မျိုးရှိပါတယ်။ **တစ်ခုတည်း** ရွေးချယ်ပါ (နှစ်ခုလုံး မသုံးပါနှင့်)။
+
+##### Option A: Basic Version (File Mount Only)
+
 ```yaml
 # secret-provider-class.yaml
 apiVersion: secrets-store.csi.x-k8s.io/v1
@@ -752,9 +756,29 @@ spec:
     tenantId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 ```
 
+**Option A ကို ဘယ်အခါ သုံးသင့်လဲ:**
+- Secrets တွေကို **file အနေနဲ့** pod ထဲမှာ mount လုပ်မယ်
+- Environment variables မလိုပါ
+- Example: `/mnt/secrets-store/DatabaseConnectionString` file အနေနဲ့ ရနိုင်မယ်
+
 ```bash
-# Apply SecretProviderClass
+# Apply Option A
 kubectl apply -f secret-provider-class.yaml
+```
+
+##### Option B: With Sync to Kubernetes Secrets
+
+**Option B ကို ဘယ်အခါ သုံးသင့်လဲ:**
+- Secrets တွေကို **Kubernetes Secret Object** အဖြစ် sync လုပ်ချင်တယ်
+- Environment variables အနေနဲ့ သုံးချင်တယ်
+- Multiple pods တွေမှာ တူညီတဲ့ secrets တွေ အသုံးပြုမယ်
+- Existing applications မှာ `secretKeyRef` pattern သုံးထားတယ်
+
+> 💡 **Recommendation:** Production မှာ Option B ကို သုံးတာ ပိုအဆင်ပြေပါတယ်။
+
+```bash
+# Apply Option B (နောက် Step 5 မှာ ပြထားပါတယ်)
+kubectl apply -f secret-provider-class-with-sync.yaml
 ```
 
 
@@ -798,7 +822,9 @@ spec:
           secretProviderClass: "azure-keyvault-secrets"
 ```
 
-#### Step 5: Sync Secrets to Kubernetes Secrets
+#### Step 5: Sync Secrets to Kubernetes Secrets (Option B Only)
+
+> ⚠️ **သတိ:** ဒါက **Option B** အတွက်ပဲ သက်ဆိုင်ပါတယ်။ Option A သုံးရင် ဒီ Step ကို ချန်လှပ်ပါ။
 
 ```yaml
 # secret-provider-class-with-sync.yaml
@@ -822,23 +848,51 @@ spec:
           objectType: secret
           objectVersion: ""
     tenantId: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-  # Sync to Kubernetes secrets
+  # ✅ secretObjects section - Key Vault secrets ကို Kubernetes Secret Object အဖြစ် sync လုပ်မယ်
   secretObjects:
-    - secretName: myapp-secrets
+    - secretName: myapp-secrets          # Kubernetes Secret နာမည်
       type: Opaque
       data:
-        - objectName: DatabaseConnectionString
-          key: DatabaseConnectionString
+        - objectName: DatabaseConnectionString    # Key Vault က secret name
+          key: DatabaseConnectionString           # Kubernetes Secret မှာ key name
         - objectName: StripeApiKey
           key: StripeApiKey
 ```
 
 ```bash
-# Apply updated SecretProviderClass
+# Apply SecretProviderClass with sync
 kubectl apply -f secret-provider-class-with-sync.yaml
 
-# Verify secrets are created
+# Verify secrets are created automatically
 kubectl get secrets myapp-secrets -o yaml
+```
+
+##### Sync အလုပ်ပုံ:
+
+```
+Azure Key Vault
+    ↓
+    ├── DatabaseConnectionString = "Server=myserver..."
+    └── StripeApiKey = "sk_live_abc123..."
+    
+         ↓ (Auto Sync)
+         
+Kubernetes Secret Object
+    ↓
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: myapp-secrets
+    type: Opaque
+    data:
+      DatabaseConnectionString: <base64>
+      StripeApiKey: <base64>
+    
+         ↓ (Available in pods)
+         
+Environment Variables:
+    DATABASE_CONNECTION_STRING = "Server=myserver..."
+    STRIPE_API_KEY = "sk_live_abc123..."
 ```
 
 ### Method 2: Using Azure Workload Identity
