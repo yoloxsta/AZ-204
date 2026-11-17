@@ -8,7 +8,6 @@
 - MSAL (Microsoft Authentication Library)
 - Managed Identities (system-assigned and user-assigned)
 - Microsoft Graph API basics
-
 ---
 ## 1. Microsoft Identity Platform
 
