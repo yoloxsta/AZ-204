@@ -10,7 +10,6 @@
 - How the AZ-204 exam is structured
 
 ---
-
 ## 1. What is Microsoft Azure?
 
 Azure is Microsoft's cloud computing platform. It provides over 200 services that let you build, deploy, and manage applications across a global network of data centers.
