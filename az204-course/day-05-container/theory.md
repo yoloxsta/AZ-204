@@ -9,7 +9,6 @@
 - When to use each container service
 
 ---
-
 ## 1. Docker Fundamentals
 
 A container packages your application code, runtime, libraries, and dependencies into a single portable unit.
