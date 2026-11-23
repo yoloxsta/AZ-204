@@ -55,7 +55,6 @@ Event Grid supports two schemas:
   "dataVersion": "1.0"
 }
 ```
-
 **CloudEvents Schema (industry standard):**
 ```json
 {
