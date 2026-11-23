@@ -26,7 +26,6 @@ In event-driven architecture, components communicate by producing and consuming 
 Event Grid is a fully managed event routing service. It uses a publish-subscribe model.
 
 ### Key Concepts
-
 - **Topics** — where events are sent (system topics or custom topics)
 - **Event Subscriptions** — route events from a topic to a handler
 - **Event Handlers** — what processes the event (Functions, Webhooks, Queues, etc.)
