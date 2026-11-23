@@ -37,7 +37,6 @@ Azure services automatically publish events to system topics:
 - Resource Groups: resource created, deleted, updated
 - Container Registry: image pushed
 - Key Vault: secret expiring
-
 ### Event Schema
 
 Event Grid supports two schemas:
