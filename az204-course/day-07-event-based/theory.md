@@ -6,7 +6,6 @@
 - Azure Event Grid: topics, subscriptions, event schemas
 - Azure Event Hubs: streaming, partitions, consumer groups
 - When to use Event Grid vs Event Hubs
-
 ---
 
 ## 1. Event-Driven Architecture
