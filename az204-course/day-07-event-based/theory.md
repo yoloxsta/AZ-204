@@ -41,7 +41,6 @@ Azure services automatically publish events to system topics:
 ### Event Schema
 
 Event Grid supports two schemas:
-
 **Event Grid Schema:**
 ```json
 {
