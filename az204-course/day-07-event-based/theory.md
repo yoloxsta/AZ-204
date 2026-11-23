@@ -81,7 +81,6 @@ Filter events before they reach the handler:
 - Maximum delivery attempts: configurable (1-30, default 30)
 
 ---
-
 ## 3. Azure Event Hubs
 
 Event Hubs is a big data streaming platform. It can receive millions of events per second.
